@@ -13,10 +13,11 @@ export const useTelegram = () => {
           tg.MainButton.show()
       }
     }
-console.log('tg.initDataUnsafe',tg)
+console.log('tg',tg)
     return {
         tg,
         user:tg.initDataUnsafe?.user,
+        queryId:tg.initDataUnsafe?.query_id,
         onClose,
         onToggleButton
     }
