@@ -13,7 +13,7 @@ export const useTelegram = () => {
           tg.MainButton.show()
       }
     }
-
+console.log('tg.initDataUnsafe',tg)
     return {
         tg,
         user:tg.initDataUnsafe?.user,
