@@ -1,4 +1,4 @@
-import React, { useState,useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import './ProductList.css'
 import ProductItem from '../ProductItem/ProductItem'
 import { useTelegram } from '../../hooks/useTelegram'
@@ -22,59 +22,60 @@ const getTotalPrice = (items = []) => {
 }
 
 const ProductList = () => {
-    const [addedItems,setAddedItems]=useState([])
+    const [addedItems, setAddedItems] = useState([])
 
-    const {tg,queryId}=useTelegram()
+    const {tg, queryId} = useTelegram()
 
 
-    const onSendData = useCallback(()=>{
-        const data={
-            products:addedItems,
-            totalPrice:getTotalPrice(addedItems),
+    const onSendData = useCallback(() => {
+        const data = {
+            products: addedItems,
+            totalPrice: getTotalPrice(addedItems),
             queryId
         }
 
-        console.log('SEND DATA',data)
         // запросы будут отправляться на публичный адрес selectel
-        fetch('http://31.172.135.178:8000/web-data',{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
+        // fetch('http://31.172.135.178:8000/web-data', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data)
+        // })
+        fetch('http://localhost:8000/web-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             },
-            body:JSON.stringify(data)
-        }).then(()=>{
-            console.log('отправился')
+            body: JSON.stringify(data)
         })
+    }, [addedItems])
 
-
-
-    },[addedItems])
-
-    useEffect(()=>{
+    useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
-        return ()=> {
+        return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
-    },[onSendData])
+    }, [onSendData])
 
     const onAdd = (product) => {
-        const alreadyAdded=addedItems.find(i=>i.id === product.id)
-        let newItems=[]
-        if (alreadyAdded){
-            newItems=addedItems.filter(i=>i.id !== product.id)
-        }else {
-            newItems=[...addedItems,product]
+        const alreadyAdded = addedItems.find(i => i.id === product.id)
+        let newItems = []
+        if (alreadyAdded) {
+            newItems = addedItems.filter(i => i.id !== product.id)
+        } else {
+            newItems = [...addedItems, product]
         }
         // обновления корзины
         setAddedItems(newItems)
 
         // проверяем если в корзине у нас товаров нет, то кнопку скрываем
-        if (newItems.length === 0){
+        if (newItems.length === 0) {
             tg.MainButton.hide()
-        }else {
+        } else {
             tg.MainButton.show()
             tg.MainButton.setParams({
-                text:`Купить ${getTotalPrice(newItems)}`
+                text: `Купить ${getTotalPrice(newItems)}`
             })
         }
 
