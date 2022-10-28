@@ -33,6 +33,8 @@ const ProductList = () => {
             totalPrice:getTotalPrice(addedItems),
             queryId
         }
+
+        console.log('SEND DATA',data)
         // запросы будут отправляться на публичный адрес selectel
         fetch('http://31.172.135.178:8000/web-data',{
             method:'POST',
@@ -40,7 +42,12 @@ const ProductList = () => {
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(data)
+        }).then(()=>{
+            console.log('отправился')
         })
+
+
+
     },[addedItems])
 
     useEffect(()=>{
