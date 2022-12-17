@@ -35,7 +35,7 @@ const ProductList = () => {
         }
 
         // запросы будут отправляться на публичный адрес selectel
-        fetch('http://31.172.135.178:8000/web-data', {
+        fetch('http://localhost:8000/web-data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
