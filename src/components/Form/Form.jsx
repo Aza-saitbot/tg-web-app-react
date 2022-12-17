@@ -20,7 +20,10 @@ const Form = () => {
     }, [country, street, subject])
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
+        tg.onEvent('mainButtonClicked', e=>{
+            console.log('onSendData',e)
+            onSendData()
+        })
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
