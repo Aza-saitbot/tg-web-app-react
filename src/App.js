@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './App.css'
+import './App.scss'
 import { useTelegram } from './hooks/useTelegram'
 import Header from './components/Header/Header'
 import { Route, Routes } from 'react-router-dom'
@@ -13,6 +13,7 @@ const App = () => {
         // приложения полностью проинициализировался, его можно отрисовать
         tg.ready()
     }, [])
+
     return (
         <div className="App">
             <Header/>

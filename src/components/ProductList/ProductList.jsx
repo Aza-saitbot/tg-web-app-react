@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import './ProductList.css'
+import './ProductList.scss'
 import ProductItem from '../ProductItem/ProductItem'
 import { useTelegram } from '../../hooks/useTelegram'
 
@@ -34,7 +34,6 @@ const ProductList = () => {
             queryId
         }
 
-        // запросы будут отправляться на публичный адрес selectel
         fetch('http://localhost:8000/web-data', {
             method: 'POST',
             headers: {
@@ -72,17 +71,16 @@ const ProductList = () => {
                 text: `Купить ${getTotalPrice(newItems)}`
             })
         }
-
     }
 
     return (
-        <div className={'list'}>
+        <div className='list'>
             {products.map(item => (
                 <ProductItem
                     key={item.id}
                     product={item}
                     onAdd={onAdd}
-                    className={'item'}
+                    className='list__item'
                 />
             ))}
         </div>
