@@ -2,16 +2,17 @@ import React, { useState, useCallback, useEffect } from 'react'
 import './ProductList.scss'
 import ProductItem from '../ProductItem/ProductItem'
 import { useTelegram } from '../../hooks/useTelegram'
+import OneImage from '../../assets/2.jpg'
 
 const products = [
-    {id: '1', title: 'Джинсы', price: 2000, description: 'Встречные, хорошо будет сидеть'},
-    {id: '2', title: 'Куртки', price: 5000, description: 'Утепленные для зимы'},
-    {id: '3', title: 'Сапоги', price: 4000, description: 'Зимние, кожа натуральное'},
-    {id: '4', title: 'Шапка', price: 500, description: 'Утепленные для зимы'},
-    {id: '5', title: 'Брюки', price: 4000, description: 'Встречные, хорошо будет сидеть'},
-    {id: '6', title: 'Носки', price: 200, description: 'Зимние'},
-    {id: '7', title: 'Ботинки', price: 3000, description: 'Зимние, кожа натуральное'},
-    {id: '8', title: 'Часы', price: 5000, description: 'Швейцарские, механика'},
+    {id: '1', title: 'Джинсы', price: 2000, description: 'Встречные, хорошо будет сидеть',image:OneImage},
+    {id: '2', title: 'Куртки', price: 5000, description: 'Утепленные для зимы',image:OneImage},
+    {id: '3', title: 'Сапоги', price: 4000, description: 'Зимние, кожа натуральное',image:OneImage},
+    {id: '4', title: 'Шапка', price: 500, description: 'Утепленные для зимы',image:OneImage},
+    {id: '5', title: 'Брюки', price: 4000, description: 'Встречные, хорошо будет сидеть',image:OneImage},
+    {id: '6', title: 'Носки', price: 200, description: 'Зимние',image:OneImage},
+    {id: '7', title: 'Ботинки', price: 3000, description: 'Зимние, кожа натуральное',image:OneImage},
+    {id: '8', title: 'Часы', price: 5000, description: 'Швейцарские, механика',image:OneImage},
 ]
 
 // верни нам просуммированное значения цен
