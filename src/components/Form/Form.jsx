@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 import './Form.css'
 import { useTelegram } from '../../hooks/useTelegram'
 
+
+
 const Form = () => {
     const [country, setCountry] = useState('')
     const [street, setStreet] = useState('')
@@ -52,7 +54,7 @@ const Form = () => {
 
     return (
         <div className={"form"}>
-            <h3>Введите ваше данные</h3>
+            <h3>Напишите, когда Вам удобно посетить салон  ?</h3>
             <input value={country} onChange={onChangeCountry} className={'input'} type="text" placeholder={'Страна'}/>
             <input value={street} onChange={onChangeStreet} className={'input'} type="text" placeholder={'Улица'}/>
             <select value={subject} onChange={onChangeSubject} className={'select'}>
