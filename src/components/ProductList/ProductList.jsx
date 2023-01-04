@@ -11,6 +11,7 @@ import ThreeOneImage from '../../assets/images/3-1.png'
 import ThreeTwoImage from '../../assets/images/3-2.png'
 import ThreeThreeImage from '../../assets/images/3-3.png'
 
+
 const products = [
     {id: '1', title: 'Джинсы', price: 2000, description: 'Встречные, хорошо будет сидеть',images:[
             {id:1,src:OneOneImage},{id:2,src:OneTwoImage}
