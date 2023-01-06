@@ -2,17 +2,29 @@ import React, { useState, useCallback, useEffect } from 'react'
 import './ProductList.scss'
 import ProductItem from '../ProductItem/ProductItem'
 import { useTelegram } from '../../hooks/useTelegram'
-import OneOneImage from '../../assets/images/1-1.png'
+
+// @ts-ignore
+import OneOneImage from "../../assets/images/1-1.png"
+// @ts-ignore
 import OneTwoImage from '../../assets/images/1-2.png'
+// @ts-ignore
 import TwoOneImage from '../../assets/images/2-1.png'
+// @ts-ignore
 import TwoTwoImage from '../../assets/images/2-2.png'
+// @ts-ignore
 import TwoThreeImage from '../../assets/images/2-3.png'
+// @ts-ignore
 import ThreeOneImage from '../../assets/images/3-1.png'
-import ThreeTwoImage from '../../assets/images/3-2.png'
-import ThreeThreeImage from '../../assets/images/3-3.png'
+// @ts-ignore
+import ThreeTwoImage from "../../assets/images/3-2.png"
+// @ts-ignore
+import ThreeThreeImage from "../../assets/images/3-3.png"
+import {IProduct} from "../../types/types";
+// @ts-ignore
 
 
-const products = [
+
+const products:Array<IProduct> = [
     {id: '1', title: 'Джинсы', price: 2000, description: 'Встречные, хорошо будет сидеть',images:[
             {id:1,src:OneOneImage},{id:2,src:OneTwoImage}
         ]},
@@ -66,7 +78,7 @@ const ProductList = () => {
         }
     }, [onSendData])
 
-    const onAdd = (product) => {
+    const onAdd = (product:IProduct) => {
         const alreadyAdded = addedItems.find(i => i.id === product.id)
         let newItems = []
         if (alreadyAdded) {
