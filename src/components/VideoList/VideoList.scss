@@ -1,7 +1,12 @@
 .videoList{
   display: flex;
-  //gap:20px;
+  row-gap:20px;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: center;
+
+  &__item{
+    width: 100%;
+  }
 
 }

@@ -26,6 +26,8 @@ const VideoList = () => {
             {listVideo.map(video=>
                 <div key={video.id} className="videoList__item">
                     <ReactPlayer
+
+                        type="video/mp4"
                         width='100%'
                         height='580px'
                         controls={true}
