@@ -13,21 +13,21 @@
       display: flex;
       flex-direction: row;
       column-gap: 10px;
-      padding: 8px 16px;
+      border-radius: 40px;
 
       cursor: pointer;
       border: 1px solid #DDDDDD;
-      border-radius: 40px;
+
       box-shadow: 0 1px 2px #DDDDDD, 0 4px 12px #DDDDDD;
 
 
       &__item{
-
+        padding: 8px 16px;
+        border-radius: 40px;
         &.active{
 
-          border-bottom: 2px solid var(--tg-theme-button-color);
-          transition: transform 0.5s ease;
-
+          background: var(--tg-theme-bg-color);
+          color: var(--tg-theme-text-color);
         }
       }
 
