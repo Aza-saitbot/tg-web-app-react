@@ -10,3 +10,8 @@ export interface IProduct {
     description:string
     images:Array<IImage>
 }
+
+export interface IVideoItem{
+    id:number
+    url:string
+}
