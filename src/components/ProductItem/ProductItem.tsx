@@ -29,7 +29,7 @@ const ProductItem: FC<IProductItem> = ({product, onAdd, className}) => {
 
     return (
         <div className={'product' + className}>
-            {selectedImage && (
+
                 <div className='product__image'>
                     {selectedImage > 1 &&
                         <Arrow cb={handlerBack} direction="back"/>
@@ -39,7 +39,6 @@ const ProductItem: FC<IProductItem> = ({product, onAdd, className}) => {
                         <Arrow cb={handlerForward} direction="forward"/>
                     }
                 </div>
-            )}
             <div className={'product__title'}>{product.title}</div>
             <div className={'product__description'}>{product.description}</div>
             <div className={'product__price'}>

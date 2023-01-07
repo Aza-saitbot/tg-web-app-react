@@ -5,6 +5,7 @@ import Header from './components/Header/Header'
 import { Route, Routes } from 'react-router-dom'
 import ProductList from './components/ProductList/ProductList'
 import Form from './components/Form/Form'
+import Home from "./pages/Home";
 
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
         <div className="App">
             <Header/>
             <Routes>
-                <Route index element={<ProductList/>}/>
+                <Route index element={<Home/>}/>
                 <Route path={'form'} element={<Form/>}/>
             </Routes>
         </div>
