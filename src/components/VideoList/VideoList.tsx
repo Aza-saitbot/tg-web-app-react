@@ -25,13 +25,12 @@ const VideoList = () => {
         <div className="videoList">
             {listVideo.map(video=>
                 <div key={video.id} className="videoList__item">
-
                     <ReactPlayer
                         width='100%'
                         height='580px'
                         controls={true}
-                        url={video.url} />
-
+                        url={video.url}
+                    />
                 </div>
             )}
         </div>
