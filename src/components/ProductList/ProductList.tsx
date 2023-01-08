@@ -69,7 +69,7 @@ const ProductList:FC<IProductList> = ({list}) => {
     }
 
     return (
-        <div className='list'>
+        <div className='productList'>
             {list.map(item => (
                 <ProductItem
                     key={item.id}

@@ -1,16 +1,17 @@
 interface Telegram {
     WebApp:any
 }
-
-// interface AmoSb {
-//     setMeta(meta: {
-//         bot_params: {
-//             username: string;
-//             company_chat_id:string
-//         };
-//     }): void;
-// }
-
 interface Window {
     Telegram:Telegram
 }
+
+declare module '*.mp4' {
+    const src: string;
+    export default src;
+}
+
+declare module '*.png' {
+    const src: string;
+    export default src;
+}
+

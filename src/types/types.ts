@@ -15,3 +15,12 @@ export interface IVideoItem{
     id:number
     url:string
 }
+
+
+export interface IReviewItem {
+    id:number
+    rsc:string
+}
+export interface IReviewList {
+    list:Array<IReviewItem>
+}

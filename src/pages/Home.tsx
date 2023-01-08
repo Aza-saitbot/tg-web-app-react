@@ -2,33 +2,45 @@ import React from 'react';
 import './Home.scss'
 import ProductList from "../components/ProductList/ProductList";
 import VideoList from "../components/VideoList/VideoList";
+import {IProduct, IReviewItem, IReviewList} from "../types/types";
+import ReviewList from "../components/ReviewList/ReviewList";
+
 import videoOne from './../assets/video/1.mp4'
 import videoTwo from './../assets/video/2.mp4'
 import videoThree from './../assets/video/3.mp4'
 import videoFour from './../assets/video/4.mp4'
 import videoFive from './../assets/video/5.mp4'
 
-// @ts-ignore
 import OneOneImage from "./../assets/images/1-1.png"
-// @ts-ignore
 import OneTwoImage from './../assets/images/1-2.png'
-// @ts-ignore
 import TwoOneImage from './../assets/images/2-1.png'
-// @ts-ignore
 import TwoTwoImage from './../assets/images/2-2.png'
-// @ts-ignore
 import TwoThreeImage from './../assets/images/2-3.png'
-// @ts-ignore
 import ThreeOneImage from './../assets/images/3-1.png'
-// @ts-ignore
 import ThreeTwoImage from "./../assets/images/3-2.png"
-// @ts-ignore
 import ThreeThreeImage from "./../assets/images/3-3.png"
-import {IProduct} from "../types/types";
-import ReviewList from "../components/ReviewList/ReviewList";
+
+import reviewOne from '../assets/reviews/1.png'
+import reviewTwo from '../assets/reviews/2.png'
+import reviewThree from '../assets/reviews/3.png'
+import reviewFour from '../assets/reviews/4.png'
+import reviewFive from '../assets/reviews/5.png'
+import reviewSix from '../assets/reviews/6.png'
+import reviewSeven from '../assets/reviews/7.png'
+import reviewEight from '../assets/reviews/8.png'
 
 
 
+const reviewList:Array<IReviewItem>=[
+    {id:1,rsc:reviewOne},
+    {id:2,rsc:reviewTwo},
+    {id:3,rsc:reviewThree},
+    {id:4,rsc:reviewFour},
+    {id:5,rsc:reviewFive},
+    {id:6,rsc:reviewSix},
+    {id:7,rsc:reviewSeven},
+    {id:8,rsc:reviewEight},
+]
 
 
 const productsList:Array<IProduct> = [
@@ -65,7 +77,7 @@ const videoList:Array<IVideoItem>=[
 const stepsComponents = {
     0: <ProductList list={productsList}/>,
     1: <VideoList list={videoList}/>,
-    2: <ReviewList/>
+    2: <ReviewList list={reviewList}/>
 }
 
 const titleTab={

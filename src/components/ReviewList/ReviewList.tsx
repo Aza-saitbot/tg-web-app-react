@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {FC} from 'react';
+import './ReviewList.scss'
+import {IReviewList} from "../../types/types";
 
-const ReviewList = () => {
+const ReviewList:FC<IReviewList> = ({list}) => {
     return (
-        <div>
-            VideoList
+        <div className='reviewList'>
+            {list.map(item=>
+                <div key={item.id} className='reviewList__item'>
+                    <img src={item.rsc} alt='image'/>
+                </div>
+            )}
         </div>
     );
 };
