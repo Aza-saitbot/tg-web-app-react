@@ -7,7 +7,9 @@ const ReviewList:FC<IReviewList> = ({list}) => {
         <div className='reviewList'>
             {list.map(item=>
                 <div key={item.id} className='reviewList__item'>
-                    <img src={item.rsc} alt='image'/>
+                    <div className='reviewList__item__image'>
+                        <img src={item.rsc} alt='image'/>
+                    </div>
                 </div>
             )}
         </div>
