@@ -26,19 +26,13 @@
         margin: -1px;
         padding: 8px 16px;
         border-radius: 40px;
-
-        &:hover{
-          background-color: #DDDDDD;
-        }
+        color: black;
 
         &.active{
 
-          color: var(--tg-theme-bg-color);
-          background: white;
+          background: var(--tg-theme-bg-color);
+          color: var(--tg-theme-text-color);
 
-          &:hover{
-            background-color: white;
-          }
         }
       }
 
