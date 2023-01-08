@@ -1,14 +1,62 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import './Form.css'
-import { useTelegram } from '../../hooks/useTelegram'
+import dayjs, { Dayjs } from 'dayjs';
+import {useTelegram} from '../../hooks/useTelegram'
+
+import {
+    Checkbox,
+    FormControl,
+    InputLabel,
+    ListItemIcon,
+    ListItemText,
+    MenuItem,
+    Select, Stack, TextField
+} from '@mui/material';
+import {DateTimePicker, LocalizationProvider, MobileDatePicker, TimePicker} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+
+
+
+export const servicesList:Array<string>=[
+    'Лазерная и фото-косметология',
+    'Ногтевой сервис',
+    'Косметология тела',
+    'Косметология лица',
+    'Парикмахерские услуги',
+    'Визаж',
+]
 
 
 
 const Form = () => {
     const [country, setCountry] = useState('')
     const [street, setStreet] = useState('')
-    const [subject, setSubject] = useState('physical')
+    const [service, setService] = useState('Не выбрано')
     const {tg} = useTelegram()
+    const [valueDate, setValueDate] = React.useState<Dayjs | null>(
+        dayjs('2014-08-18T21:11:54'),
+    );
+    const [time,setTime]=useState<Dayjs | null>()
+
+    const handleChangeDate = (newValue: Dayjs | null) => {
+        setValueDate(newValue);
+    };
+    const handleChangeTime = (newValue: Dayjs | null) => {
+        setTime(newValue);
+    };
+
+    const [selected, setSelected] = useState<Array<string>>([]);
+    const isAllSelected =
+        servicesList.length > 0 && selected.length === servicesList.length;
+
+    const handleChange = (event) => {
+        const value = event.target.value;
+        if (value[value.length - 1] === "all") {
+            setSelected(selected.length === servicesList.length ? [] : servicesList);
+            return;
+        }
+        setSelected(value);
+    };
 
     //useCallback - использую для того что бы, при каждом перерисовке,
     // функция не создавалась новая (сохранить ссылку на функцию)
@@ -16,10 +64,10 @@ const Form = () => {
         const data = {
             country,
             street,
-            subject
+            services:selected
         }
         tg.sendData(JSON.stringify(data))
-    }, [country, street, subject])
+    }, [country, street, service])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -35,12 +83,12 @@ const Form = () => {
     }, [])
 
     useEffect(() => {
-        if (!country || !street) {
+        if (!valueDate || !time) {
             tg.MainButton.hide()
         } else {
             tg.MainButton.show()
         }
-    }, [country, street])
+    }, [valueDate, time])
 
     const onChangeCountry = (e) => {
         setCountry(e.target.value)
@@ -49,18 +97,75 @@ const Form = () => {
         setStreet(e.target.value)
     }
     const onChangeSubject = (e) => {
-        setSubject(e.target.value)
+        setService(e.target.value)
     }
 
     return (
         <div className={"form"}>
-            <h3>Напишите, когда Вам удобно посетить салон  ?</h3>
-            <input value={country} onChange={onChangeCountry} className={'input'} type="text" placeholder={'Страна'}/>
+            <FormControl variant="outlined" fullWidth={true}>
+                <InputLabel id="mutiple-select-label">Выбрать услугу</InputLabel>
+                <Select
+                    labelId="mutiple-select-label"
+                    multiple
+                    value={selected}
+                    onChange={handleChange}
+                    renderValue={(selected) => selected.join(", ")}
+                
+                >
+                    <MenuItem
+                        value="all"
+                        classes={{
+                            // root: isAllSelected ? classes.selectedAll : ""
+                        }}
+                    >
+                        <ListItemIcon>
+                            <Checkbox
+                                // classes={{ indeterminate: classes.indeterminateColor }}
+                                checked={isAllSelected}
+                                indeterminate={
+                                    selected.length > 0 && selected.length < servicesList.length
+                                }
+                            />
+                        </ListItemIcon>
+                        <ListItemText
+                            // classes={{ primary: classes.selectAllText }}
+                            primary="Выбрать все"
+                        />
+                    </MenuItem>
+                    {servicesList.map((option) => (
+                        <MenuItem key={option} value={option}>
+                            <ListItemIcon>
+                                <Checkbox checked={selected.indexOf(option) > -1} />
+                            </ListItemIcon>
+                            <ListItemText primary={option} />
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+            <div>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Stack spacing={3}>
+                        <MobileDatePicker
+                            label="Выбрать дату"
+                            inputFormat="MM/DD/YYYY"
+
+                            value={valueDate}
+                            onChange={handleChangeDate}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                        <TimePicker
+                            label="Выбрать время"
+                            value={time}
+                            onChange={handleChangeTime}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </Stack>
+                </LocalizationProvider>
+
+            </div>
+            
             <input value={street} onChange={onChangeStreet} className={'input'} type="text" placeholder={'Улица'}/>
-            <select value={subject} onChange={onChangeSubject} className={'select'}>
-                <option value="physical">Фиц. лицо</option>
-                <option value="legal">Юр. лицо</option>
-            </select>
+
         </div>
     )
 }

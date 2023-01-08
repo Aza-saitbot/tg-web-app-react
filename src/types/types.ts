@@ -24,3 +24,17 @@ export interface IReviewItem {
 export interface IReviewList {
     list:Array<IReviewItem>
 }
+
+
+export interface ColourOption {
+    readonly value: string;
+    readonly label: string;
+    readonly color: string;
+    readonly isFixed?: boolean;
+    readonly isDisabled?: boolean;
+}
+
+export interface IServiceItem {
+    id:number,
+    title:string
+}
