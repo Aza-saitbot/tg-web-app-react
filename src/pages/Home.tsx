@@ -89,7 +89,6 @@ const titleTab={
 const Home = () => {
     const [step, setStep] = React.useState<number>(0);
 
-
     const Step = stepsComponents[step]
 
     const onNextStep = () => {

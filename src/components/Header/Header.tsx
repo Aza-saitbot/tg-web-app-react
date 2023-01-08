@@ -11,7 +11,7 @@ const Header = () => {
         <div className='header'>
             <Button onClick={onClose}>Закрыть</Button>
             <span className='header__username'>
-                {user?.username}
+                {`Hoşgeldiniz, ${user?.username}`}
             </span>
         </div>
     );
