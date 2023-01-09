@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import './Form.css'
+import './Form.scss'
 import dayjs, { Dayjs } from 'dayjs';
 import {useTelegram} from '../../hooks/useTelegram'
 
@@ -18,25 +18,22 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 
 
 export const servicesList:Array<string>=[
-    'Лазерная и фото-косметология',
-    'Ногтевой сервис',
-    'Косметология тела',
-    'Косметология лица',
     'Парикмахерские услуги',
-    'Визаж',
+    'Ногтевой сервис',
+    'Коррекция окрашивания бровей',
+    "Маникюр и педикюр"
 ]
 
 
-
 const Form = () => {
-    const [country, setCountry] = useState('')
-    const [street, setStreet] = useState('')
+    const [comment, setComment] = useState('')
     const [service, setService] = useState('Не выбрано')
-    const {tg} = useTelegram()
     const [valueDate, setValueDate] = React.useState<Dayjs | null>(
         dayjs('2014-08-18T21:11:54'),
     );
     const [time,setTime]=useState<Dayjs | null>()
+    const {tg} = useTelegram()
+
 
     const handleChangeDate = (newValue: Dayjs | null) => {
         setValueDate(newValue);
@@ -62,12 +59,13 @@ const Form = () => {
     // функция не создавалась новая (сохранить ссылку на функцию)
     const onSendData = useCallback(() => {
         const data = {
-            country,
-            street,
-            services:selected
+            services:selected,
+            comment,
+            date:valueDate,
+            time
         }
         tg.sendData(JSON.stringify(data))
-    }, [country, street, service])
+    },  [service,valueDate,time,comment])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -78,7 +76,7 @@ const Form = () => {
 
     useEffect(() => {
         tg.MainButton.setParams({
-            text: 'Отправить данные'
+            text: 'Отправить'
         })
     }, [])
 
@@ -90,18 +88,12 @@ const Form = () => {
         }
     }, [valueDate, time])
 
-    const onChangeCountry = (e) => {
-        setCountry(e.target.value)
-    }
-    const onChangeStreet = (e) => {
-        setStreet(e.target.value)
-    }
-    const onChangeSubject = (e) => {
-        setService(e.target.value)
+    const onChangeComment = (e) => {
+        setComment(e.target.value)
     }
 
     return (
-        <div className={"form"}>
+        <div className="form">
             <FormControl variant="outlined" fullWidth={true}>
                 <InputLabel id="mutiple-select-label">Выбрать услугу</InputLabel>
                 <Select
@@ -163,9 +155,7 @@ const Form = () => {
                 </LocalizationProvider>
 
             </div>
-            
-            <input value={street} onChange={onChangeStreet} className={'input'} type="text" placeholder={'Улица'}/>
-
+            <input value={comment} onChange={onChangeComment} className='form__comment' type="text" placeholder={'Комментария'}/>
         </div>
     )
 }
